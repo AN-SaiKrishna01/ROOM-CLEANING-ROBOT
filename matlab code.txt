@@ -1,0 +1,293 @@
+clc
+ close all;
+ clear all;
+a = arduino();
+fprintf('\n\t Hey , im your cleaning assistant ! would you like me to clean room with vaccumm or not?\n\t'); 
+n=input(' if you like then please reply with 1 either 0 for without vaccumm  ');
+if n==0
+    fprintf('\n\t I dont use vaccumm,  Can i use scrubber to clean room?. \t\n');
+    m=input('  if you would like me to clean the floor then reply with 1 else 0');
+    if m==1
+        fprintf('\n I am turning on the scrubber ! hold on keep me down !\n ');
+            writeDigitalPin(a,'D4',1);
+           
+           fprintf('\n\t  would you like me to on the motor for water cleaning.\t\n');
+            o=input('if you want please reply with 1 else 0 ');
+            if o==0
+                fprintf('\n I will  clean the floor like a shining diamond . Dont worry lay back  and control me \n ');
+                for i=0:1:5
+                vid = videoinput('winvideo', 1, 'MJPG_320x240');
+                src = getselectedsource(vid);
+                vid.FramesPerTrigger = 1;
+                snap=getsnapshot(vid);
+                imagesc(snap);
+                imwrite(snap,'a.bmp');
+                b=im2bw(snap);
+                c=~b;
+                d=~c;
+                imshow(d);
+                Area=nnz(d);
+                disp(Area);
+                p=1000.0;
+                q=2000.0;
+                r=3000.0;
+                s=4000.0;
+                t=5000.0;
+                u=1500.0;
+    if Area<=p
+    disp('FORWARD IS YOUR SIGNAL ');
+    writeDigitalPin(a,'D7',1);
+    writeDigitalPin(a,'D8',1);
+    writeDigitalPin(a,'D9',1);
+    writeDigitalPin(a,'D10',1);
+    pause(10);
+    end
+    
+    if  Area<=q&&Area>r
+    disp('LEFT IS YOUR SIGNAL');
+    writeDigitalPin(a,'D7',1);
+    writeDigitalPin(a,'D8',1);
+    writeDigitalPin(a,'D9',0);
+    writeDigitalPin(a,'D10',0);
+    pause(1);
+    end 
+    if  Area<=r&&Area>s
+    disp('RIGHT IS YOUR SIGNAL');
+    writeDigitalPin(a,'D7',0);
+    writeDigitalPin(a,'D8',0);
+    writeDigitalPin(a,'D9',1);
+    writeDigitalPin(a,'D10',1);
+    pause(1);
+    end
+    
+    if Area<=t&&Area>=s
+    disp('STOP IS YOUR SIGNAL');
+    writeDigitalPin(a,'D7',0);
+    writeDigitalPin(a,'D8',0);
+    writeDigitalPin(a,'D9',0);
+    writeDigitalPin(a,'D10',0);
+    pause(2);
+    end
+    if Area>=1&&Area<p
+    disp('ERROR IN YOUR SIGNAL KINDLY RESTART THE ASSISTANT');
+    goto(vid);
+    end
+  
+end     
+                
+                end 
+             if o==1
+                    fprintf('\n i will clean the floor with all my efforts \n ');
+                    writeDigitalPin(a,'D3',1);
+                    disp(' please contol me . I have an OCD of cleaning the same surface multiple times  ');
+ 
+                                        for i=0:1:5
+                    vid = videoinput('winvideo', 1, 'MJPG_320x240');
+                    src = getselectedsource(vid);
+                    vid.FramesPerTrigger = 1;
+                    snap=getsnapshot(vid);
+                    imagesc(snap);
+                    imwrite(snap,'a.bmp');
+                    b=im2bw(snap);
+                    c=~b;
+                    d=~c;
+                    imshow(d);
+                    Area=nnz(d);
+                    disp(Area);
+                    p=1000.0;
+                    q=2000.0;
+                    r=3000.0;
+                    s=4000.0;
+                    t=5000.0;
+                    u=1500.0;
+                        if Area<=p
+                        disp('FORWARD IS YOUR SIGNAL ');
+                        writeDigitalPin(a,'D7',1);
+                        writeDigitalPin(a,'D8',1);
+                        writeDigitalPin(a,'D9',1);
+                        writeDigitalPin(a,'D10',1);
+                        pause(10);
+                        end
+ 
+                        if  Area<=q&&Area>r
+                        disp('LEFT IS YOUR SIGNAL');
+                        writeDigitalPin(a,'D7',0);
+                        writeDigitalPin(a,'D8',1);
+                        writeDigitalPin(a,'D9',0);
+                        writeDigitalPin(a,'D10',1);
+                        pause(1);
+                        end 
+                        if  Area<=r&&Area>s
+                        disp('RIGHT IS YOUR SIGNAL');
+                        writeDigitalPin(a,'D7',1);
+                        writeDigitalPin(a,'D8',0);
+                        writeDigitalPin(a,'D9',1);
+                        writeDigitalPin(a,'D10',0);
+                        pause(1);
+                        end
+ 
+                        if Area<=t&&Area>=s
+                        disp('STOP IS YOUR SIGNAL');
+                        writeDigitalPin(a,'D7',0);
+                        writeDigitalPin(a,'D8',0);
+                        writeDigitalPin(a,'D9',0);
+                        writeDigitalPin(a,'D10',0);
+                        pause(2);
+                        end
+                        if Area>=1&&Area<p
+                        disp('ERROR IN YOUR SIGNAL KINDLY RESTART THE ASSISTANT');
+                        goto(vid);
+                        end
+  
+end     
+                
+            end
+    end
+    end
+ 
+if n==1                    
+writeDigitalPin(a,'D2',1);
+ m=input(' Sure i will use vaccumm,  Can i use scrubber to clean room?. if you would like me to clean the floor then reply with 1  ');
+ 
+ if m==1
+     fprintf('\n I am turning on the scrubber ! hold on keep me down ! \n ');
+            writeDigitalPin(a,'D3',1);
+           
+            o=input('\n Would you like me to on the motor for water cleaning. if you want please reply with 1 else 0 \n');
+            if o==0
+                fprintf('\n I will  clean the floor like a shining diamond . Dont worry lay back  and control me \n');
+                
+                                for i=0:1:5
+                    vid = videoinput('winvideo', 1, 'MJPG_320x240');
+                    src = getselectedsource(vid);
+                    vid.FramesPerTrigger = 1;
+                    snap=getsnapshot(vid);
+                    imagesc(snap);
+                    imwrite(snap,'a.bmp');
+                    b=im2bw(snap);
+                    c=~b;
+                    d=~c;
+                    imshow(d);
+                    Area=nnz(d);
+                    disp(Area);
+                    p=1000.0;
+                    q=2000.0;
+                    r=3000.0;
+                    s=4000.0;
+                    t=5000.0;
+                    u=1500.0;
+                        if Area<=p
+                        disp('FORWARD IS YOUR SIGNAL ');
+                        writeDigitalPin(a,'D7',1);
+                        writeDigitalPin(a,'D8',1);
+                        writeDigitalPin(a,'D9',1);
+                        writeDigitalPin(a,'D10',1);
+                        pause(10);
+                        end
+ 
+                        if  Area<=q&&Area>r
+                        disp('LEFT IS YOUR SIGNAL');
+                        writeDigitalPin(a,'D7',0);
+                        writeDigitalPin(a,'D8',1);
+                        writeDigitalPin(a,'D9',0);
+                        writeDigitalPin(a,'D10',1);
+                        pause(1);
+                        end 
+                        if  Area<=r&&Area>s
+                        disp('RIGHT IS YOUR SIGNAL');
+                        writeDigitalPin(a,'D7',1);
+                        writeDigitalPin(a,'D8',0);
+                        writeDigitalPin(a,'D9',1);
+                        writeDigitalPin(a,'D10',0);
+                        pause(1);
+                        end
+ 
+                        if Area<=t&&Area>=s
+                        disp('STOP IS YOUR SIGNAL');
+                        writeDigitalPin(a,'D7',0);
+                        writeDigitalPin(a,'D8',0);
+                        writeDigitalPin(a,'D9',0);
+                        writeDigitalPin(a,'D10',0);
+                        pause(2);
+                        end
+                        if Area>=1&&Area<p
+                        disp('ERROR IN YOUR SIGNAL KINDLY RESTART THE ASSISTANT');
+                        goto(vid);
+                        end
+ 
+                                end     
+                
+               
+                end 
+             if o==1
+                    fprintf('\n i will clean the floor with all my efforts \n');
+                    writeDigitalPin(a,'D4',1);
+                    fprintf('\n please contol me .\n I have an OCD of cleaning the same surface multiple times.. \n');
+                                        for i=0:1:5
+                    vid = videoinput('winvideo', 1, 'MJPG_320x240');
+                    src = getselectedsource(vid);
+                    vid.FramesPerTrigger = 1;
+                    snap=getsnapshot(vid);
+                    imagesc(snap);
+                    imwrite(snap,'a.bmp');
+                    b=im2bw(snap);
+                    c=~b;
+                    d=~c;
+                    imshow(d);
+                    Area=nnz(d);
+                    disp(Area);
+                    p=5000.0;
+                    q=11000.0;
+                    r=6000.0;
+                    s=12000.0;
+                    t=19000.0;
+                    u=20000.0;
+                    v=26000.0;
+                    w=27000.0;
+                    x=36000.0;
+ 
+                        if Area<=q&&Area>=r
+                        disp('FORWARD IS YOUR SIGNAL ');
+                        writeDigitalPin(a,'D7',1);
+                        writeDigitalPin(a,'D8',1);
+                        writeDigitalPin(a,'D9',1);
+                        writeDigitalPin(a,'D10',1);
+                        pause(10);
+                        end
+ 
+                        if  Area<=t&&Area>=s
+                        disp('LEFT IS YOUR SIGNAL');
+                        writeDigitalPin(a,'D7',0);
+                        writeDigitalPin(a,'D8',1);
+                        writeDigitalPin(a,'D9',0);
+                        writeDigitalPin(a,'D10',1);
+                        pause(1);
+                        end 
+                        if  Area<=v&&Area>=u
+                        disp('RIGHT IS YOUR SIGNAL');
+                        writeDigitalPin(a,'D7',1);
+                        writeDigitalPin(a,'D8',0);
+                        writeDigitalPin(a,'D9',1);
+                        writeDigitalPin(a,'D10',0);
+                        pause(1);
+                        end
+ 
+                        if Area<=x&&Area>=w
+                        disp('STOP IS YOUR SIGNAL');
+                        writeDigitalPin(a,'D7',0);
+                        writeDigitalPin(a,'D8',0);
+                        writeDigitalPin(a,'D9',0);
+                        writeDigitalPin(a,'D10',0);
+                        pause(2);
+                        end
+                        if Area>=1&&Area<p
+                        disp('ERROR IN YOUR SIGNAL KINDLY RESTART THE ASSISTANT');
+ 
+                        end
+ 
+                                        end     
+                
+            end
+    end
+ 
+    end 
